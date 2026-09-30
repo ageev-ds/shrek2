@@ -98,11 +98,15 @@ function listFiles(root: string, sub = ''): string[] {
 
 function parseError(file: string, text: string, err: unknown): string {
   const msg = String((err as Error).message ?? err);
+  // Новый V8 сам пишет «(line 3 column 21)», старый — только «position 47»
+  const lc = /line (\d+) column (\d+)/.exec(msg);
+  if (lc) return `${file}: ошибка в строке ${lc[1]}, столбец ${lc[2]}`;
   const pos = /position (\d+)/.exec(msg);
   if (pos) {
-    const line = text.slice(0, Number(pos[1])).split('\n').length;
-    return `${file}: ошибка в строке ${line} (${msg.replace(/^.*?:\s*/, '')})`;
+    const before = text.slice(0, Number(pos[1])).split('\n');
+    return `${file}: ошибка в строке ${before.length}, столбец ${before.at(-1)!.length + 1}`;
   }
+  if (/end of JSON|Unterminated/i.test(msg)) return `${file}: файл обрывается — не хватает закрывающей скобки или кавычки`;
   return `${file}: ${msg}`;
 }
 

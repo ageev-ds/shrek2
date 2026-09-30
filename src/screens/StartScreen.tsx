@@ -91,7 +91,9 @@ function SettingsModal({ open, onClose }: { open: boolean; onClose: () => void }
   const cfg = useCfg();
   const [sfx, setSfx] = useState(cfg.game.sfxVolume);
   const [music, setMusic] = useState(cfg.game.musicVolume);
-  useEffect(() => setVolumes(sfx, music), [sfx, music]);
+  useEffect(() => {
+    setVolumes(sfx, music);
+  }, [sfx, music]);
   return (
     <Modal open={open} onClose={onClose} width={520}>
       <div className="col" style={{ gap: '1.1rem' }}>

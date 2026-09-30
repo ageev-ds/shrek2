@@ -301,7 +301,9 @@ function QuestionsTab({ draft, setDraft }: TabProps) {
   const list = draft.questions[type] as unknown as Record<string, unknown>[];
   const setList = (l: unknown[]) => setDraft((d) => ({ ...d, questions: { ...d.questions, [type]: l } }));
   const upd = (i: number, patch: Record<string, unknown>) => setList(list.map((x, j) => (j === i ? { ...x, ...patch } : x)));
-  useEffect(() => window.scrollTo(0, 0), [type]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [type]);
   return (
     <div className="ed-q">
       <aside className="ed-q-types">

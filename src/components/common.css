@@ -98,10 +98,11 @@
   position: fixed;
   z-index: 400;
   top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* центрирование без transform: его занимает анимация появления */
+  left: 20px;
+  right: 20px;
+  margin: 0 auto;
   max-width: 900px;
-  width: calc(100% - 40px);
   padding: 0.7rem 3rem 0.7rem 1rem;
   border-radius: 12px;
   background: #f5c542;

@@ -98,8 +98,10 @@ export const useGame = create<GameState>((set, get) => {
       let idx = team.pos;
       let counted = 0;
       const remaining = locations.filter((_, i) => open(i)).length;
-      // Считаем шаги только по непройденным локациям: команда всегда попадает на новую
-      while (counted < roll && remaining > 0) {
+      // Считаем шаги только по непройденным локациям: команда всегда попадает на новую.
+      // Больше одного круга не ходим — иначе при 1–2 оставшихся локациях фишка кружит по карте десятки прыжков.
+      const steps = remaining > 0 ? ((roll - 1) % remaining) + 1 : 0;
+      while (counted < steps) {
         idx = (idx + 1 + n) % n;
         path.push(idx);
         if (open(idx)) counted++;
