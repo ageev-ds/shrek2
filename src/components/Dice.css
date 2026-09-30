@@ -1,0 +1,50 @@
+.dice-scene {
+  --s: 150px;
+  width: var(--s);
+  height: var(--s);
+  perspective: 700px;
+  position: relative;
+}
+.dice {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1.25s cubic-bezier(0.15, 0.6, 0.25, 1);
+}
+.face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  padding: 16%;
+  gap: 4%;
+  border-radius: 18%;
+  background: radial-gradient(circle at 30% 25%, #fffdf5, #f1e4c4 70%, #dccba0);
+  border: 3px solid #b99b62;
+  backface-visibility: hidden;
+}
+.face span {
+  border-radius: 50%;
+}
+.face .pip {
+  background: radial-gradient(circle at 35% 30%, #5a8a2a, #2b4a14);
+}
+.face.f1 .pip {
+  background: radial-gradient(circle at 35% 30%, #e8604f, #8e1414);
+}
+.f1 { transform: translateZ(calc(var(--s) / 2)); }
+.f6 { transform: rotateY(180deg) translateZ(calc(var(--s) / 2)); }
+.f2 { transform: rotateX(90deg) translateZ(calc(var(--s) / 2)); }
+.f5 { transform: rotateX(-90deg) translateZ(calc(var(--s) / 2)); }
+.f3 { transform: rotateY(90deg) translateZ(calc(var(--s) / 2)); }
+.f4 { transform: rotateY(-90deg) translateZ(calc(var(--s) / 2)); }
+.dice-shadow {
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -28px;
+  height: 18px;
+  border-radius: 50%;
+  background: radial-gradient(rgba(0, 0, 0, 0.5), transparent 70%);
+}

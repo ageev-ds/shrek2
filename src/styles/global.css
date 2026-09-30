@@ -1,0 +1,310 @@
+/* Лёгкий стиль: никаких blur-фильтров, backdrop-filter, SVG-шумов и mix-blend.
+   Анимации в циклах — только transform/opacity (их делает композитор, а не процессор). */
+:root {
+  --swamp-950: #121f0d;
+  --swamp-900: #1f3317;
+  --swamp-800: #2b4520;
+  --swamp-700: #3a5a2b;
+  --swamp-500: #6b8e23;
+  --swamp-300: #a4c26a;
+  --wood-950: #1e120b;
+  --wood-900: #3b2417;
+  --wood-800: #4f301e;
+  --wood-700: #6b4226;
+  --wood-500: #8f5f36;
+  --gold: #d4a017;
+  --gold-light: #f1c94b;
+  --gold-dark: #9a7310;
+  --cream: #f5e6c8;
+  --cream-dim: #d9c7a3;
+  --ink: #1b120b;
+  --ok: #58a834;
+  --ok-light: #7fd14f;
+  --bad: #c0392b;
+  --bad-light: #e8604f;
+
+  --font-title: 'Lobster', Georgia, serif;
+  --font-body: 'Open Sans', 'Segoe UI', sans-serif;
+
+  --wood-bg: repeating-linear-gradient(
+      2deg,
+      rgba(0, 0, 0, 0) 0 18px,
+      rgba(0, 0, 0, 0.07) 18px 20px,
+      rgba(255, 220, 160, 0.04) 20px 34px
+    ),
+    linear-gradient(180deg, #6b4226, #4f301e 60%, #3b2417);
+  --shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+  --text-shadow: 0 2px 0 rgba(0, 0, 0, 0.55), 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--swamp-950);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: clamp(14px, 0.95vw, 19px);
+  user-select: none;
+}
+input,
+textarea,
+select {
+  user-select: text;
+}
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-title);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+button {
+  font: inherit;
+  color: inherit;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-gold {
+  font-family: var(--font-title);
+  color: var(--gold-light);
+  text-shadow: 0 3px 0 #3b2417, 0 6px 16px rgba(0, 0, 0, 0.55);
+}
+
+.panel {
+  position: relative;
+  background: var(--wood-bg);
+  border: 3px solid var(--wood-950);
+  border-radius: 20px;
+  box-shadow: inset 0 1px 0 rgba(255, 220, 160, 0.2), var(--shadow);
+  outline: 2px solid rgba(212, 160, 23, 0.4);
+  outline-offset: -9px;
+}
+.parchment {
+  background: radial-gradient(ellipse at 30% 20%, #fffaf0, #f5e6c8 60%, #e8d3a8);
+  color: var(--ink);
+  border-radius: 14px;
+  box-shadow: inset 0 0 30px rgba(120, 80, 30, 0.35), 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- кнопки ---------- */
+.btn {
+  --b1: var(--gold-light);
+  --b2: var(--gold);
+  --b3: var(--gold-dark);
+  --fg: var(--wood-950);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0.7em 1.5em;
+  border: 2px solid var(--wood-950);
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--b1), var(--b2) 55%, var(--b3));
+  color: var(--fg);
+  font-weight: 800;
+  font-size: 1.05rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 5px 0 var(--wood-950), 0 8px 14px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  white-space: nowrap;
+}
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+.btn:active:not(:disabled) {
+  transform: translateY(3px);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn.big {
+  font-size: 1.5rem;
+  padding: 0.6em 2em;
+}
+.btn.small {
+  font-size: 0.85rem;
+  padding: 0.4em 0.95em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 3px 0 var(--wood-950);
+}
+.btn.green {
+  --b1: var(--ok-light);
+  --b2: var(--ok);
+  --b3: #356b1d;
+  --fg: #0d1f06;
+}
+.btn.red {
+  --b1: #f07b6c;
+  --b2: var(--bad);
+  --b3: #7d2018;
+  --fg: #fff4ee;
+}
+.btn.wood {
+  --b1: var(--wood-500);
+  --b2: var(--wood-700);
+  --b3: var(--wood-900);
+  --fg: var(--cream);
+}
+.btn.ghost {
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--cream);
+  border-color: rgba(245, 230, 200, 0.3);
+  box-shadow: none;
+}
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 2.6em;
+  height: 2.6em;
+  border-radius: 50%;
+  border: 2px solid rgba(245, 230, 200, 0.35);
+  background: rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  font-size: 1.05rem;
+}
+.icon-btn:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* ---------- поля ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+}
+.field > span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--cream-dim);
+}
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 0.55em 0.75em;
+  border-radius: 8px;
+  border: 2px solid var(--wood-950);
+  background: #fbf3e0;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  outline: none;
+}
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: var(--gold);
+}
+.textarea {
+  resize: vertical;
+  min-height: 4.5em;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.spacer {
+  flex: 1;
+}
+.muted {
+  color: var(--cream-dim);
+}
+kbd {
+  padding: 0.05em 0.45em;
+  border-radius: 5px;
+  border: 1px solid rgba(245, 230, 200, 0.4);
+  border-bottom-width: 3px;
+  font-size: 0.8em;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- частицы (чистый CSS) ---------- */
+.particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.particles i {
+  position: absolute;
+  bottom: -10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff6a8;
+  box-shadow: 0 0 8px 3px rgba(255, 240, 140, 0.55);
+  opacity: 0;
+  animation: float-up linear infinite;
+  will-change: transform, opacity;
+}
+@keyframes float-up {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate3d(var(--dx, 30px), -95vh, 0);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+@keyframes glow-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particles {
+    display: none;
+  }
+}

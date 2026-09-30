@@ -1,0 +1,22 @@
+{
+  "locations": [
+    { "id": "shrek_hut", "name": "Хижина Шрека", "icon": "hut.svg", "x": 26, "y": 70, "game": "guess_description", "reward": 150, "time": 20, "video": "location_hut.mp4",
+      "description": "Ведущий читает описание — команда угадывает, о каком персонаже речь." },
+    { "id": "forest", "name": "Лес", "icon": "forest.svg", "x": 11, "y": 46, "game": "quick_questions", "reward": 200, "time": 30, "video": "location_forest.mp4",
+      "description": "5 вопросов с вариантами ответа. На всё — 30 секунд!" },
+    { "id": "donkey_pen", "name": "Загон Осла", "icon": "donkey_pen.svg", "x": 20, "y": 18, "game": "repeat_phrase", "reward": 150, "time": 30, "video": "location_donkey.mp4",
+      "description": "Произнесите фразу героя с нужной интонацией — артистично!" },
+    { "id": "duloc", "name": "Дюлок", "icon": "duloc.svg", "x": 42, "y": 12, "game": "odd_one_out", "reward": 150, "time": 15, "video": "location_duloc.mp4",
+      "description": "Из пяти картинок одна лишняя. Найдите её за 15 секунд." },
+    { "id": "cat_house", "name": "Дом Кота", "icon": "cat_house.svg", "x": 64, "y": 13, "game": "charades", "reward": 200, "time": 30, "video": "location_cat.mp4",
+      "description": "Один игрок молча показывает персонажа — команда угадывает." },
+    { "id": "dragon_lair", "name": "Логово дракона", "icon": "dragon_lair.svg", "x": 85, "y": 25, "game": "true_false", "reward": 200, "time": 30, "video": "location_dragon.mp4",
+      "description": "5 утверждений о мире Шрека: правда или ложь?" },
+    { "id": "farquaad_castle", "name": "Замок Фаркуада", "icon": "castle.svg", "x": 89, "y": 54, "game": "word_builder", "reward": 150, "time": 20, "video": "location_castle.mp4",
+      "description": "Соберите имя героя из перемешанных букв." },
+    { "id": "throne_room", "name": "Тронный зал", "icon": "throne.svg", "x": 76, "y": 74, "game": "final_quiz", "reward": 250, "time": 10, "video": "location_throne.mp4",
+      "description": "Королевский блиц! Отвечает та команда, что крикнет первой." },
+    { "id": "swamp", "name": "Болото", "icon": "swamp.svg", "x": 51, "y": 78, "game": "shout", "reward": 200, "time": 5, "video": "location_swamp.mp4",
+      "description": "Все команды по очереди кричат в микрофон. Самые громкие получают луковицы!" }
+  ]
+}

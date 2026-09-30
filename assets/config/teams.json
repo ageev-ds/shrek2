@@ -1,0 +1,7 @@
+{
+  "teams": [
+    { "id": "shrek", "name": "Команда Шрека", "color": "#4CAF50", "emoji": "🧅", "character": "shrek.svg" },
+    { "id": "donkey", "name": "Команда Осла", "color": "#9E9E9E", "emoji": "🐴", "character": "donkey.svg" },
+    { "id": "cat", "name": "Команда Кота", "color": "#FF9800", "emoji": "🐱", "character": "puss.svg" }
+  ]
+}

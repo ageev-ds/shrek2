@@ -1,0 +1,10 @@
+node_modules/
+dist/
+dist-electron/
+dist-renderer/
+test-results/
+tests/.tmp/
+*.log
+.DS_Store
+release-tmp/
+scripts/art/.gen.mjs
