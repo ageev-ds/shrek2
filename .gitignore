@@ -8,3 +8,4 @@ tests/.tmp/
 .DS_Store
 release-tmp/
 scripts/art/.gen.mjs
+release/

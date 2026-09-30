@@ -32,7 +32,9 @@ export function Particles({ count = 12 }: { count?: number }) {
 export function MediaImage({ kind, name, alt = '', className = '', style }: { kind: MediaKind; name: string; alt?: string; className?: string; style?: React.CSSProperties }) {
   const url = mediaUrl(kind, name);
   const [broken, setBroken] = useState(false);
-  useEffect(() => setBroken(false), [url]);
+  useEffect(() => {
+    setBroken(false);
+  }, [url]);
   if (!url || broken) return <Placeholder label={alt || name} className={className} style={style} />;
   return <img src={url} alt={alt} className={className} style={style} draggable={false} loading="lazy" decoding="async" onError={() => setBroken(true)} />;
 }

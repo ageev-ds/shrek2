@@ -139,11 +139,12 @@ export function normalizeQuestions(raw: unknown, def: Questions, warn: Warn): Qu
   return out;
 }
 
+/** Отсутствующая часть (файла нет или он не прочитался — об этом уже предупредили) берётся из дефолтов молча */
 export function normalizeAll(raw: Partial<Record<keyof AllConfig, unknown>>, def: AllConfig, warn: Warn): AllConfig {
   return {
-    game: normalizeGame(raw.game, def.game, warn),
-    teams: normalizeTeams(raw.teams, def.teams, warn),
-    locations: normalizeLocations(raw.locations, def.locations, warn),
-    questions: normalizeQuestions(raw.questions, def.questions, warn),
+    game: raw.game === undefined ? def.game : normalizeGame(raw.game, def.game, warn),
+    teams: raw.teams === undefined ? def.teams : normalizeTeams(raw.teams, def.teams, warn),
+    locations: raw.locations === undefined ? def.locations : normalizeLocations(raw.locations, def.locations, warn),
+    questions: raw.questions === undefined ? def.questions : normalizeQuestions(raw.questions, def.questions, warn),
   };
 }
